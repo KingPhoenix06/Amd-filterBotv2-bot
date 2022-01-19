@@ -100,7 +100,7 @@ async def start(client, message):
     if file_id.split("-", 1)[0] == "BATCH":
         sts = await message.reply("Please wait")
         file_id = file_id.split("-", 1)[1]
-        msgs = BATCH_FILES.get(file_id)
+        msgs = BATCH_FILE_CAPTIONS.get(file_id)
         if not msgs:
             file = await client.download_media(file_id)
             try: 
