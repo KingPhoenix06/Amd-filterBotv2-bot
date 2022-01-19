@@ -1,7 +1,7 @@
 import os
 import logging
 import random
-import asyncio 
+import asyncio
 from Script import script
 from pyrogram import Client, filters
 from pyrogram.errors import ChatAdminRequired, FloodWait
@@ -13,7 +13,7 @@ from utils import get_size, is_subscribed, temp
 import re
 import json
 import base64
-logger = logging.getLogger(name)
+logger = logging.getLogger(__name__)
 
 BATCH_FILES = {}
 
@@ -22,10 +22,10 @@ async def start(client, message):
     if message.chat.type in ['group', 'supergroup']:
         buttons = [
             [
-                InlineKeyboardButton('🤖 Updates', url='https://t.me/AMD_LinkZz)
+                InlineKeyboardButton('🤖 Updates', url='https://t.me/AMD_LinkZz')
             ],
             [
-                InlineKeyboardButton('Join Our Group', url=f"https://t.me/AMD_Discussiom"),
+                InlineKeyboardButton('Join Our Group', url=f"https://t.me/AMD_Discussion"),
             ]
             ]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -44,7 +44,7 @@ async def start(client, message):
             InlineKeyboardButton('🔍 Search Movies', switch_inline_query_current_chat='')
             ],[
             InlineKeyboardButton('🎞 Main Channel', url='https://t.me/AMD_LinkZz'),
-            InlineKeyboardButton('Request Group 🔗', url='https://AMD_Discussion')
+            InlineKeyboardButton('Request Group 🔗', url='https://t.me/AMD_Discussion')
             ],[
             InlineKeyboardButton('About Meh 📬', callback_data='about')
         ]]
@@ -74,7 +74,7 @@ async def start(client, message):
             btn.append([InlineKeyboardButton(" 🔄 Try Again", callback_data=f"checksub#{message.command[1]}")])
         await client.send_message(
             chat_id=message.from_user.id,
-            text="Please Join My Updates Channel to use this Bot!",
+            text="**Please Join My Updates Channel to use this Bot!**",
             reply_markup=InlineKeyboardMarkup(btn),
             parse_mode="markdown"
             )
@@ -233,7 +233,7 @@ async def channel_info(bot, message):
     else:
         raise ValueError("Unexpected type of CHANNELS")
 
-    text = '📑 Indexed channels/groups\n'
+    text = '📑 **Indexed channels/groups**\n'
     for channel in channels:
         chat = await bot.get_chat(channel)
         if chat.username:
@@ -241,7 +241,7 @@ async def channel_info(bot, message):
         else:
             text += '\n' + chat.title or chat.first_name
 
-    text += f'\n\nTotal: {len(CHANNELS)}'
+    text += f'\n\n**Total:** {len(CHANNELS)}'
 
     if len(text) < 4096:
         await message.reply(text)
